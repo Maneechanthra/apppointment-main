@@ -15,27 +15,27 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        shadowColor: Colors.white,
-        elevation: 3,
-        automaticallyImplyLeading: false,
-        title: const Row(
-          children: [
-            Icon(
-              Icons.home,
-              size: 35,
-            ),
-            SizedBox(width: 10),
-            Text(
-              "หน้าแรก",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   shadowColor: Colors.white,
+      //   elevation: 3,
+      //   automaticallyImplyLeading: false,
+      //   title: const Row(
+      //     children: [
+      //       Icon(
+      //         Icons.home,
+      //         size: 35,
+      //       ),
+      //       SizedBox(width: 10),
+      //       Text(
+      //         "หน้าแรก",
+      //         style: TextStyle(
+      //           fontWeight: FontWeight.bold,
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -43,23 +43,70 @@ class _HomepageState extends State<Homepage> {
               child: Column(
                 children: [
                   const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ),
+                    child: Row(
+                      children: [
+                        const SizedBox(),
+                        SizedBox(
+                          width: 60,
+                          child: Image.asset("assets/images/student.png"),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 220,
+                              child: Text(
+                                "นายธรรมนูญ เหมือนสิงห์",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w600),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 3,
+                            ),
+                            SizedBox(
+                              width: 200,
+                              child: Text(
+                                "นิสิตหลักสูตรวิทยาการคอมพิวเตอร์และสารสนเทศ",
+                                style: TextStyle(
+                                    fontSize: 14, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Icon(
+                          Icons.notifications,
+                          size: 30,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
                     height: 10,
                   ),
                   const Padding(
-                    padding: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 20, top: 10),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "รายงานจำนวนการนัดหมาย",
                         style: TextStyle(
                           fontSize: 20,
-                          // fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 0, 94, 170),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
                   ),
                   const Padding(
                     padding: EdgeInsets.only(left: 20),

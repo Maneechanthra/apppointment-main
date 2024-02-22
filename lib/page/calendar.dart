@@ -60,8 +60,12 @@ class _CalendarState extends State<Calendar> {
   @override
   Widget build(BuildContext context) {
     _events = {
-      DateTime.utc(2024, 1, 15): ['โครงงาน', 'โครงงาน'],
-      DateTime.utc(2024, 1, 16): ['โครงงาน'],
+      DateTime.utc(2024, 1, 15): [
+        'โครงงาน',
+        'Homeroom ภาควิชา',
+        'นัดหมายพูดคุยรายละเอียดโครงงาน'
+      ],
+      // DateTime.utc(2024, 1, 16): ['นัดหมายพูดคุยรายละเอียดโครงงาน'],
     };
 
     return Scaffold(
@@ -133,22 +137,18 @@ class _CalendarState extends State<Calendar> {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.only(left: 30),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   "ข้อมูลการนัดหมาย",
-                  style: TextStyle(
-                    fontSize: 22,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
             const SizedBox(
               height: 5,
             ),
-
-            // Example ListView.builder for dynamic appointments
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -169,231 +169,329 @@ class _CalendarState extends State<Calendar> {
   }
 
   Widget buildAppointmentCard(DateTime date, List<String> appointments) {
+    List<String> teacher = [
+      "อาจารย์อัจฉรา นามบุรี",
+      "อาจารย์จารุวัฒน์ ไพลไหล",
+      "อาจารย์จักรนรินทร์ คงเจริญ",
+    ];
+    String status = "รอนัดหมาย";
+    List<String> date = [
+      "16 มกราคม 2567",
+      "20 กุมภาพันธ์ 2567",
+      "3 มีนาคม 2567",
+    ];
+    List<String> timestart = [
+      "9.00",
+      "15.00",
+      "7.30",
+    ];
+    List<String> timeend = [
+      "12.00",
+      "16.00",
+      "10.30",
+    ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         for (final appointment in appointments) ...[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: buildSingleAppointmentCard(appointment),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      spreadRadius: 2.0,
+                      blurRadius: 8.0,
+                      offset: const Offset(0.0, 1.0),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                "assets/images/teacher.png",
+                                width: 70,
+                              ),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    teacher[appointments.indexOf(appointment)],
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  SizedBox(
+                                    width: 200,
+                                    child: Text(
+                                      "วันที่: ${date[appointments.indexOf(appointment)]}",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 200,
+                                    child: Text(
+                                      "เวลา: ${timestart[appointments.indexOf(appointment)]} - ${timeend[appointments.indexOf(appointment)]} น.",
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  SizedBox(
+                                    width: 200,
+                                    child: Text(
+                                      "เรื่อง: $appointment",
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      const Divider(
+                        color: Color.fromARGB(255, 13, 187, 158),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              const Text(
+                                "สถานะ ",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                "$status",
+                                style: const TextStyle(
+                                  color: Color.fromARGB(255, 206, 158, 0),
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            height: 35,
+                            width: 110,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: const Color.fromARGB(255, 13, 187, 158),
+                              ),
+                            ),
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CalendarDetail(),
+                                  ),
+                                );
+                              },
+                              child: const Center(
+                                child: Text(
+                                  "ข้อมูลเพิ่มเติม",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 13, 187, 158),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
-          // const SizedBox(height: 15),
         ],
       ],
     );
   }
 
-  Widget buildSingleAppointmentCard(String appointment) {
-    String lecturer = "อาจารย์ อัจฉรา นามบุรี";
-    String status = "รอนัดหมาย";
-    String topic = appointment;
+  // Widget buildSingleAppointmentCard(String appointment) {
+  //   List<String> teacher = [
+  //     "อาจารย์อัจฉรา นามบุรี",
+  //     "อาจารย์จักรนรินทร์ คงเจริญ",
+  //     "อาจารย์จารุวัฒน์ ไพลไหล"
+  //   ];
+  //   String status = "รอนัดหมาย";
+  //   String topic = appointment;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 2.0,
-              blurRadius: 8.0,
-              offset: const Offset(0.0, 1.0),
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        "assets/images/teacher.png",
-                        height: 60,
-                        width: 60,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            lecturer,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            "16 มกราคม 2567 | 10.30-11.20 น.",
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            "เรื่อง $topic",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(height: 5),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     Padding(
-              //       padding: const EdgeInsets.only(left: 35),
-              //       child: Text(
-              //         lecturer,
-              //         style: const TextStyle(
-              //           color: Colors.black,
-              //           fontSize: 16,
-              //         ),
-              //       ),
-              //     ),
-              //     Text(
-              //       status,
-              //       style: const TextStyle(
-              //         color: Colors.grey,
-              //         fontSize: 16,
-              //         fontWeight: FontWeight.bold,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-
-              // Row(
-              //   children: [
-              //     const Padding(
-              //       padding: EdgeInsets.only(left: 35),
-              //       child: Text(
-              //         "เรื่อง ",
-              //         style: TextStyle(
-              //           color: Colors.black,
-              //           fontSize: 16,
-              //         ),
-              //       ),
-              //     ),
-              //     Text(
-              //       topic,
-              //       style: const TextStyle(
-              //         color: Colors.black,
-              //         fontSize: 16,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // const SizedBox(height: 5),
-              const Divider(
-                color: Color.fromARGB(255, 13, 187, 158),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // Row(
-                  //   children: [
-                  //     const Icon(
-                  //       Icons.notifications,
-                  //       size: 25,
-                  //       color: const Color.fromARGB(255, 13, 187, 158),
-                  //     ),
-                  //     const SizedBox(width: 10),
-                  //     Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(
-                  //           "เวลา $time",
-                  //           style: const TextStyle(
-                  //             color: Colors.black,
-                  //             fontSize: 16,
-                  //           ),
-                  //         ),
-                  //         Text(
-                  //           "วันที่ $date",
-                  //           style: const TextStyle(
-                  //             color: Colors.black,
-                  //             fontSize: 16,
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ],
-                  // ),
-                  Row(
-                    children: [
-                      Text(
-                        "สถานะ ",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        "$status",
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 255, 196, 4),
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    height: 35,
-                    width: 110,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 13, 187, 158),
-                      ),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const CalendarDetail(),
-                          ),
-                        );
-                      },
-                      child: const Center(
-                        child: Text(
-                          "ข้อมูลเพิ่มเติม",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromARGB(255, 13, 187, 158),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 10),
+  //     child: Container(
+  //       decoration: BoxDecoration(
+  //         color: Colors.white,
+  //         borderRadius: BorderRadius.circular(10.0),
+  //         boxShadow: [
+  //           BoxShadow(
+  //             color: Colors.black.withOpacity(0.1),
+  //             spreadRadius: 2.0,
+  //             blurRadius: 8.0,
+  //             offset: const Offset(0.0, 1.0),
+  //           ),
+  //         ],
+  //       ),
+  //       child: Padding(
+  //         padding: const EdgeInsets.all(15.0),
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.center,
+  //           crossAxisAlignment: CrossAxisAlignment.start,
+  //           children: [
+  //             Row(
+  //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //               children: [
+  //                 Row(
+  //                   children: [
+  //                     Image.asset(
+  //                       "assets/images/teacher.png",
+  //                       height: 60,
+  //                       width: 60,
+  //                     ),
+  //                     const SizedBox(
+  //                       width: 15,
+  //                     ),
+  //                     Column(
+  //                       crossAxisAlignment: CrossAxisAlignment.start,
+  //                       children: [
+  //                         Text(
+  //                           teacher[1],
+  //                           style: const TextStyle(
+  //                             color: Colors.black,
+  //                             fontSize: 16,
+  //                             fontWeight: FontWeight.bold,
+  //                           ),
+  //                         ),
+  //                         const SizedBox(height: 2),
+  //                         const Text(
+  //                           "16 มกราคม 2567 | 10.30-11.20 น.",
+  //                           style: TextStyle(
+  //                             color: Colors.black,
+  //                             fontSize: 14,
+  //                           ),
+  //                         ),
+  //                         const SizedBox(height: 2),
+  //                         SizedBox(
+  //                           width: 200,
+  //                           child: Text(
+  //                             "เรื่อง: $topic",
+  //                             style: const TextStyle(
+  //                               color: Colors.black,
+  //                               fontSize: 16,
+  //                             ),
+  //                           ),
+  //                         ),
+  //                         const SizedBox(height: 2),
+  //                       ],
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ],
+  //             ),
+  //             const SizedBox(height: 5),
+  //             const Divider(
+  //               color: Color.fromARGB(255, 13, 187, 158),
+  //             ),
+  //             Row(
+  //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //               children: [
+  //                 Row(
+  //                   children: [
+  //                     const Text(
+  //                       "สถานะ ",
+  //                       style: TextStyle(
+  //                         color: Colors.black,
+  //                         fontSize: 16,
+  //                       ),
+  //                     ),
+  //                     Text(
+  //                       "$status",
+  //                       style: const TextStyle(
+  //                         color: Color.fromARGB(255, 206, 158, 0),
+  //                         fontSize: 16,
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //                 Container(
+  //                   height: 35,
+  //                   width: 110,
+  //                   decoration: BoxDecoration(
+  //                     borderRadius: BorderRadius.circular(10),
+  //                     border: Border.all(
+  //                       color: const Color.fromARGB(255, 13, 187, 158),
+  //                     ),
+  //                   ),
+  //                   child: InkWell(
+  //                     onTap: () {
+  //                       Navigator.push(
+  //                         context,
+  //                         MaterialPageRoute(
+  //                           builder: (context) => const CalendarDetail(),
+  //                         ),
+  //                       );
+  //                     },
+  //                     child: const Center(
+  //                       child: Text(
+  //                         "ข้อมูลเพิ่มเติม",
+  //                         style: TextStyle(
+  //                           fontSize: 16,
+  //                           fontWeight: FontWeight.bold,
+  //                           color: Color.fromARGB(255, 13, 187, 158),
+  //                         ),
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ],
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   String _getThaiMonthName(int month) {
     switch (month) {

@@ -15,9 +15,12 @@ class _DonutChartState extends State<DonutChart> {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 1.3,
+      aspectRatio: 1.1,
       child: Column(
         children: <Widget>[
+          SizedBox(
+            height: 20,
+          ),
           Container(
             child: Expanded(
               child: AspectRatio(
@@ -51,7 +54,7 @@ class _DonutChartState extends State<DonutChart> {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.only(left: 30, top: 30),
+            padding: EdgeInsets.only(left: 30, top: 50, bottom: 10),
             child: Column(
               children: <Widget>[
                 Indicator(
