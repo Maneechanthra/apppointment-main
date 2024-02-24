@@ -25,10 +25,10 @@ class _CalendarState extends State<Calendar> {
   }
 
   @override
-  // void initState() {
-  //   super.initState();
-  //   _selectedEvents = ValueNotifier<List<String>>([]);
-  // }
+  void initState() {
+    super.initState();
+    _selectedEvents = ValueNotifier<List<String>>([]);
+  }
 
   @override
   void dispose() {
@@ -167,6 +167,107 @@ class _CalendarState extends State<Calendar> {
       ),
     );
   }
+
+  // Widget _Listappointment(DateTime date, List<String> appointments) {
+  //   List<String> teacher = [
+  //     "อาจารย์อัจฉรา นามบุรี",
+  //     "อาจารย์จารุวัฒน์ ไพลไหล",
+  //     "อาจารย์จักรนรินทร์ คงเจริญ",
+  //   ];
+  //   String status = "รอนัดหมาย";
+  //   List<String> date = [
+  //     "16 มกราคม 2567",
+  //     "20 กุมภาพันธ์ 2567",
+  //     "3 มีนาคม 2567",
+  //   ];
+  //   List<String> timestart = [
+  //     "9.00",
+  //     "15.00",
+  //     "7.30",
+  //   ];
+  //   List<String> timeend = [
+  //     "12.00",
+  //     "16.00",
+  //     "10.30",
+  //   ];
+  //   List<String> room = [
+  //     "ห้องพักอาจารย์",
+  //     "ห้อง 7-114/2",
+  //     "อื่น ๆ",
+  //   ];
+
+  //   return Column(
+  //     children: [
+  //       for (final appointment in appointments) ...[
+  //         Padding(
+  //             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+  //             child: Container(
+  //               width: MediaQuery.of(context).size.width * 1,
+  //               height: 150,
+  //               decoration: BoxDecoration(
+  //                   color: Colors.white,
+  //                   boxShadow: const [
+  //                     BoxShadow(
+  //                       color: Colors.black26,
+  //                       offset: Offset(0, 10),
+  //                       blurRadius: 15,
+  //                     )
+  //                   ],
+  //                   borderRadius: BorderRadius.circular(12)),
+  //               child: Padding(
+  //                 padding: const EdgeInsets.all(10),
+  //                 child: Row(
+  //                   children: [
+  //                     Container(
+  //                       decoration: BoxDecoration(
+  //                         borderRadius: BorderRadius.circular(100),
+  //                         color: Color.fromARGB(255, 238, 238, 238),
+  //                       ),
+  //                       child: SizedBox(
+  //                         width: 100,
+  //                         child: Padding(
+  //                           padding: const EdgeInsets.all(10.0),
+  //                           child: Image.asset("assets/images/teacher.png"),
+  //                         ),
+  //                       ),
+  //                     ),
+  //                     Padding(
+  //                       padding: EdgeInsets.only(left: 10),
+  //                       child: Column(
+  //                         children: [
+  //                           SizedBox(
+  //                             width: 180,
+  //                             child: Text(
+  //                               teacher[appointments.indexOf(appointment)],
+  //                               style: TextStyle(
+  //                                 fontWeight: FontWeight.w600,
+  //                                 fontSize: 16,
+  //                               ),
+  //                               overflow: TextOverflow.ellipsis,
+  //                             ),
+  //                           ),
+  //                           SizedBox(
+  //                             width: 180,
+  //                             child: Text(
+  //                               "เรื่อง: ${appointments[appointments.indexOf(appointment)]}",
+  //                               style: TextStyle(
+  //                                 fontWeight: FontWeight.w600,
+  //                                 fontSize: 16,
+  //                               ),
+  //                               overflow: TextOverflow.ellipsis,
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             )),
+  //       ]
+  //     ],
+  //   );
+  // }
 
   Widget buildAppointmentCard(DateTime date, List<String> appointments) {
     List<String> teacher = [
