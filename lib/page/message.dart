@@ -93,6 +93,7 @@ class _MessageState extends State<Message> {
               time: '11.00-12.30 น.',
               topic: 'ปรึกษาโครงงานจบการศึกษา',
               lecturer: 'อาจารย์อัจฉรา นามบุรี',
+              images: 'assets/images/teacher1.jpg',
               status: 'รอยืนยัน',
               index: index,
             ),
@@ -104,7 +105,8 @@ class _MessageState extends State<Message> {
               date: '19 มกราคม 2567',
               time: '09.30-10.30 น.',
               topic: 'ประเมินผลการทดลอง',
-              lecturer: 'อาจารย์สมศักดิ์ ใจดี',
+              lecturer: 'อาจารย์สาวิณี แสงสุริยันต์   ',
+              images: 'assets/images/teacher2.jpg',
               status: 'รอยืนยัน',
               index: index,
             ),
@@ -116,7 +118,8 @@ class _MessageState extends State<Message> {
               date: '19 มกราคม 2567',
               time: '14.00-15.30 น.',
               topic: 'สรุปโครงการวิจัย',
-              lecturer: 'อาจารย์วิทยา ความรู้',
+              lecturer: 'อาจารย์จักรนรินทร์ คงเจริญ',
+              images: 'assets/images/teacher3.jpg',
               status: 'รอยืนยัน',
               index: index,
             ),
@@ -133,6 +136,7 @@ class _MessageState extends State<Message> {
     required String lecturer,
     required String status,
     required int index,
+    required String images,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -160,10 +164,12 @@ class _MessageState extends State<Message> {
                 children: [
                   Row(
                     children: [
-                      Image.asset(
-                        "assets/images/teacher.png",
-                        height: 60,
-                        width: 60,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image.asset(
+                          images,
+                          width: 60,
+                        ),
                       ),
                       const SizedBox(
                         width: 15,

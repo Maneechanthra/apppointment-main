@@ -168,134 +168,44 @@ class _CalendarState extends State<Calendar> {
     );
   }
 
-  // Widget _Listappointment(DateTime date, List<String> appointments) {
-  //   List<String> teacher = [
-  //     "อาจารย์อัจฉรา นามบุรี",
-  //     "อาจารย์จารุวัฒน์ ไพลไหล",
-  //     "อาจารย์จักรนรินทร์ คงเจริญ",
-  //   ];
-  //   String status = "รอนัดหมาย";
-  //   List<String> date = [
-  //     "16 มกราคม 2567",
-  //     "20 กุมภาพันธ์ 2567",
-  //     "3 มีนาคม 2567",
-  //   ];
-  //   List<String> timestart = [
-  //     "9.00",
-  //     "15.00",
-  //     "7.30",
-  //   ];
-  //   List<String> timeend = [
-  //     "12.00",
-  //     "16.00",
-  //     "10.30",
-  //   ];
-  //   List<String> room = [
-  //     "ห้องพักอาจารย์",
-  //     "ห้อง 7-114/2",
-  //     "อื่น ๆ",
-  //   ];
-
-  //   return Column(
-  //     children: [
-  //       for (final appointment in appointments) ...[
-  //         Padding(
-  //             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-  //             child: Container(
-  //               width: MediaQuery.of(context).size.width * 1,
-  //               height: 150,
-  //               decoration: BoxDecoration(
-  //                   color: Colors.white,
-  //                   boxShadow: const [
-  //                     BoxShadow(
-  //                       color: Colors.black26,
-  //                       offset: Offset(0, 10),
-  //                       blurRadius: 15,
-  //                     )
-  //                   ],
-  //                   borderRadius: BorderRadius.circular(12)),
-  //               child: Padding(
-  //                 padding: const EdgeInsets.all(10),
-  //                 child: Row(
-  //                   children: [
-  //                     Container(
-  //                       decoration: BoxDecoration(
-  //                         borderRadius: BorderRadius.circular(100),
-  //                         color: Color.fromARGB(255, 238, 238, 238),
-  //                       ),
-  //                       child: SizedBox(
-  //                         width: 100,
-  //                         child: Padding(
-  //                           padding: const EdgeInsets.all(10.0),
-  //                           child: Image.asset("assets/images/teacher.png"),
-  //                         ),
-  //                       ),
-  //                     ),
-  //                     Padding(
-  //                       padding: EdgeInsets.only(left: 10),
-  //                       child: Column(
-  //                         children: [
-  //                           SizedBox(
-  //                             width: 180,
-  //                             child: Text(
-  //                               teacher[appointments.indexOf(appointment)],
-  //                               style: TextStyle(
-  //                                 fontWeight: FontWeight.w600,
-  //                                 fontSize: 16,
-  //                               ),
-  //                               overflow: TextOverflow.ellipsis,
-  //                             ),
-  //                           ),
-  //                           SizedBox(
-  //                             width: 180,
-  //                             child: Text(
-  //                               "เรื่อง: ${appointments[appointments.indexOf(appointment)]}",
-  //                               style: TextStyle(
-  //                                 fontWeight: FontWeight.w600,
-  //                                 fontSize: 16,
-  //                               ),
-  //                               overflow: TextOverflow.ellipsis,
-  //                             ),
-  //                           ),
-  //                         ],
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ),
-  //             )),
-  //       ]
-  //     ],
-  //   );
-  // }
-
   Widget buildAppointmentCard(DateTime date, List<String> appointments) {
-    List<String> teacher = [
+    List<String> teachers = [
       "อาจารย์อัจฉรา นามบุรี",
-      "อาจารย์จารุวัฒน์ ไพลไหล",
+      "อาจารย์สาวิณี แสงสุริยันต์",
       "อาจารย์จักรนรินทร์ คงเจริญ",
     ];
+    List<String> students = [
+      "นายสุเมธ มณีจันทรา",
+      "นายธรรมนูญ เหมือนสิงห์",
+      "นายปิติภัทร มะลิทอง",
+    ];
     String status = "รอนัดหมาย";
-    List<String> date = [
+    List<String> appointmentDates = [
       "16 มกราคม 2567",
       "20 กุมภาพันธ์ 2567",
       "3 มีนาคม 2567",
     ];
-    List<String> timestart = [
+    List<String> timeStarts = [
       "9.00",
       "15.00",
       "7.30",
     ];
-    List<String> timeend = [
+    List<String> timeEnds = [
       "12.00",
       "16.00",
       "10.30",
+    ];
+    List<String> images = [
+      "assets/images/teacher1.jpg",
+      "assets/images/teacher2.jpg",
+      "assets/images/teacher3.jpg",
+      "assets/images/std1.jpg",
     ];
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        for (final appointment in appointments) ...[
+        for (int i = 0; i < appointments.length; i++) ...[
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Padding(
@@ -324,9 +234,14 @@ class _CalendarState extends State<Calendar> {
                         children: [
                           Row(
                             children: [
-                              Image.asset(
-                                "assets/images/teacher.png",
-                                width: 70,
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: Image.asset(
+                                  i % 2 == 0
+                                      ? images[i ~/ 2]
+                                      : "assets/images/std${(i ~/ 2) + 1}.jpg",
+                                  width: 60,
+                                ),
                               ),
                               const SizedBox(
                                 width: 15,
@@ -334,19 +249,24 @@ class _CalendarState extends State<Calendar> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    teacher[appointments.indexOf(appointment)],
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
+                                  SizedBox(
+                                    child: Text(
+                                      i % 2 == 0
+                                          ? teachers[i ~/ 2]
+                                          : students[i ~/ 2],
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      maxLines: 1,
                                     ),
                                   ),
                                   const SizedBox(height: 2),
                                   SizedBox(
                                     width: 200,
                                     child: Text(
-                                      "วันที่: ${date[appointments.indexOf(appointment)]}",
+                                      "วันที่: ${appointmentDates[i]}",
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 14,
@@ -356,7 +276,7 @@ class _CalendarState extends State<Calendar> {
                                   SizedBox(
                                     width: 200,
                                     child: Text(
-                                      "เวลา: ${timestart[appointments.indexOf(appointment)]} - ${timeend[appointments.indexOf(appointment)]} น.",
+                                      "เวลา: ${timeStarts[i]} - ${timeEnds[i]} น.",
                                       style: TextStyle(
                                         color: Colors.black,
                                         fontSize: 14,
@@ -367,7 +287,7 @@ class _CalendarState extends State<Calendar> {
                                   SizedBox(
                                     width: 200,
                                     child: Text(
-                                      "เรื่อง: $appointment",
+                                      "เรื่อง: ${appointments[i]}",
                                       style: const TextStyle(
                                         color: Colors.black,
                                         fontSize: 14,
