@@ -1,8 +1,6 @@
 import 'package:apppointment/page/addTimeOpenClose.dart';
 import 'package:apppointment/page/changepassword.dart';
-import 'package:apppointment/page/convenient.dart';
 import 'package:apppointment/page/profile_dashboard.dart';
-import 'package:apppointment/page/profile_edit.dart';
 import 'package:apppointment/page/history.dart';
 import 'package:apppointment/page/login.dart';
 import 'package:flutter/material.dart';

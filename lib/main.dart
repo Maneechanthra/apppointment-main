@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         fontFamily: GoogleFonts.prompt().fontFamily,
       ),
-      home: ScreenIndexPgae(),
+      home: Login(),
       debugShowCheckedModeBanner: false,
     );
   }

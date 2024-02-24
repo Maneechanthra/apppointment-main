@@ -38,32 +38,32 @@ class _ScreenIndexPgaeState extends State<ScreenIndexPgae>
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(
-            height: 100,
-          ),
+          // const SizedBox(
+          //   height: 100,
+          // ),
           Center(
             child: Image.asset(
-              "assets/images/logo.png",
-              width: 200,
+              "assets/images/logo_app_7.png",
+              width: 150,
             ),
           ),
-          Text(
-            "CIS-Appointments",
-            style: GoogleFonts.mitr(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 0, 221, 184)),
-          ),
           // Text(
-          //   "แอปพลิเคชันนัดหมายระหว่างนิสิตและอาจารย์ภาควิชาวิทยาการคอมพิวเตอร์และสารสนเทศ",
+          //   "CIS",
           //   style: GoogleFonts.mitr(
-          //       fontSize: 10,
+          //       fontSize: 60,
+          //       fontWeight: FontWeight.bold,
+          //       color: Color.fromARGB(255, 0, 221, 184)),
+          // ),
+          // Text(
+          //   "Appointments",
+          //   style: GoogleFonts.mitr(
+          //       fontSize: 16,
           //       fontWeight: FontWeight.normal,
           //       color: const Color.fromARGB(255, 0, 0, 0)),
           // ),
-          const SizedBox(
-            height: 200,
-          ),
+          // const SizedBox(
+          //   height: 200,
+          // ),
         ],
       ),
     );
