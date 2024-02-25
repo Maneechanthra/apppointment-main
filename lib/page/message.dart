@@ -263,8 +263,8 @@ class _MessageState extends State<Message> {
                         child: Text(
                           "ข้อมูลเพิ่มเติม",
                           style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                             color: Color.fromARGB(255, 13, 187, 158),
                           ),
                         ),

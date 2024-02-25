@@ -14,6 +14,7 @@ class Calendar extends StatefulWidget implements PreferredSizeWidget {
 
 class _CalendarState extends State<Calendar> {
   late DateTime today;
+  late DateTime selectedFutureDay; // เพิ่มตัวแปรนี้
   Map<DateTime, List<String>> _events = {};
   late final ValueNotifier<List<String>> _selectedEvents;
 
@@ -21,6 +22,7 @@ class _CalendarState extends State<Calendar> {
   void initState() {
     super.initState();
     today = DateTime.now();
+    selectedFutureDay = today; // กำหนดค่าเริ่มต้นเป็นวันปัจจุบัน
     _selectedEvents = ValueNotifier<List<String>>([]);
   }
 
@@ -45,6 +47,9 @@ class _CalendarState extends State<Calendar> {
 
   void _onDaySelected(DateTime day, DateTime focusedDay) {
     setState(() {
+      if (!_isWithin3Days(day)) {
+        return;
+      }
       today = day;
     });
   }
@@ -305,7 +310,7 @@ class _CalendarState extends State<Calendar> {
                           Row(
                             children: [
                               const Text(
-                                "สถานะ ",
+                                "สถานะ: ",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 16,
@@ -314,8 +319,9 @@ class _CalendarState extends State<Calendar> {
                               Text(
                                 "$status",
                                 style: const TextStyle(
-                                  color: Color.fromARGB(255, 206, 158, 0),
+                                  color: Color.fromARGB(255, 255, 153, 0),
                                   fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ],
@@ -343,8 +349,8 @@ class _CalendarState extends State<Calendar> {
                                 child: Text(
                                   "ข้อมูลเพิ่มเติม",
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
                                     color: Color.fromARGB(255, 13, 187, 158),
                                   ),
                                 ),

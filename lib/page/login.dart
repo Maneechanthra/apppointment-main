@@ -21,7 +21,7 @@ class _LoginState extends State<Login> {
                 image: const AssetImage("assets/images/bg.jpg"),
                 fit: BoxFit.cover,
                 colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.6),
+                  Colors.black.withOpacity(0.8),
                   BlendMode.darken,
                 ),
               ),
@@ -34,8 +34,21 @@ class _LoginState extends State<Login> {
                 child: Text(
                   "เข้าสู่ระบบ",
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              const Center(
+                child: Text(
+                  "หากเข้าสู่ระบบครั้งแรกจะต้องตั้งค่ารหัสผ่าน",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: Colors.white,
                   ),
                 ),
@@ -60,7 +73,7 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Container(
-                  height: 55,
+                  height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
@@ -83,7 +96,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: EdgeInsets.only(left: 15),
                       child: TextFormField(
                         decoration: InputDecoration(
                           hintText: 'กรอกรหัสนิสิตหรืออีเมล',
@@ -91,6 +104,7 @@ class _LoginState extends State<Login> {
                             fontSize: 16.0,
                             fontFamily: GoogleFonts.prompt().fontFamily,
                           ),
+                          prefixIcon: Icon(Icons.email_rounded),
                         ),
                       ),
                     ),
@@ -124,7 +138,7 @@ class _LoginState extends State<Login> {
                         child: Text(
                           "เข้าสู่ระบบ",
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
