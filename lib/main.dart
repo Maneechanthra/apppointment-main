@@ -1,6 +1,5 @@
 import 'package:apppointment/notification_controller.dart';
 import 'package:apppointment/page/login.dart';
-import 'package:apppointment/page/screen_index.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

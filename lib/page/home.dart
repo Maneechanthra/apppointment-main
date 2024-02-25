@@ -114,7 +114,7 @@ class _HomepageState extends State<Homepage> {
                       children: [
                         SizedBox(
                           width: 30,
-                          child: Image.asset("assets/images/analysis.png"),
+                          child: Image.asset("assets/images/pie-chart.png"),
                         ),
                         SizedBox(
                           width: 10,
