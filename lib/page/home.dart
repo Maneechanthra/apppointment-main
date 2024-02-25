@@ -108,18 +108,26 @@ class _HomepageState extends State<Homepage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.only(left: 20, top: 10),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "รายงานจำนวนการนัดหมาย",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 0, 94, 170),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 30,
+                          child: Image.asset("assets/images/analysis.png"),
                         ),
-                      ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "รายงานจำนวนการนัดหมาย",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(255, 0, 94, 170),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(

@@ -265,7 +265,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.only(right: 10, left: 10),
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Divider(
                   color: const Color.fromARGB(255, 13, 187, 158),
                 ),
