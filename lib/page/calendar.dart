@@ -13,20 +13,14 @@ class Calendar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  DateTime today = DateTime.now();
+  late DateTime today;
   Map<DateTime, List<String>> _events = {};
   late final ValueNotifier<List<String>> _selectedEvents;
-  // CalendarFormat _calendarFormat = CalendarFormat.month;
-  // RangeSelectionMode _rangeSelectionMode = RangeSelectionMode.toggledOff;
-  void _onDaySelected(DateTime day, DateTime focusedDay) {
-    setState(() {
-      today = day;
-    });
-  }
 
   @override
   void initState() {
     super.initState();
+    today = DateTime.now();
     _selectedEvents = ValueNotifier<List<String>>([]);
   }
 
@@ -40,22 +34,20 @@ class _CalendarState extends State<Calendar> {
     return _events[day] ?? [];
   }
 
-  // List<String> _getEventsForRange(DateTime start, DateTime end) {
-  //   final days = daysInRange(start, end);
-  //   return [
-  //     for (final d in days) ..._getEventsForDay(d),
-  //   ];
-  // }
+  bool _isWeekend(DateTime day) {
+    return day.weekday == DateTime.saturday || day.weekday == DateTime.sunday;
+  }
 
-  // List<DateTime> daysInRange(DateTime start, DateTime end) {
-  //   final List<DateTime> days = [];
+  bool _isWithin3Days(DateTime day) {
+    final diffToToday = day.difference(today).inDays;
+    return diffToToday >= 0 && diffToToday <= 3;
+  }
 
-  //   for (int i = 0; i <= end.difference(start).inDays; i++) {
-  //     days.add(start.add(Duration(days: i)));
-  //   }
-
-  //   return days;
-  // }
+  void _onDaySelected(DateTime day, DateTime focusedDay) {
+    setState(() {
+      today = day;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +118,8 @@ class _CalendarState extends State<Calendar> {
                   calendarStyle: const CalendarStyle(outsideDaysVisible: false),
                   eventLoader: _getEventsForDay,
                   onDaySelected: _onDaySelected,
+                  enabledDayPredicate: (day) =>
+                      !_isWeekend(day) && _isWithin3Days(day),
                 ),
               ),
             ),
